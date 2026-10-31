@@ -269,6 +269,8 @@ the exported predictions under every scheme, so both places report the same
 macro-F1 (0.821 in the re-execution).
 
 
+## Citation
+
 ```bibtex
 @article{wang2026termite,
   title   = {From presence--absence to termite counts and re-calibratable
