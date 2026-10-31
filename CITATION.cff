@@ -1,0 +1,48 @@
+cff-version: 1.2.0
+message: >-
+  If you use this code or data, please cite it as below.  The code in this
+  repository is released under the MIT License; the released data files
+  (data/TGSD_sample/ and data/series-new_curated.csv) are released under the
+  Creative Commons Attribution 4.0 International License (CC BY 4.0).  See
+  LICENSE for both terms.
+title: "sro-gascade: code and data for leakage-safe evaluation of enclosed-chamber CO2-CH4 curves"
+abstract: >-
+  Sliding-window sequence reorganization (SRO), the GASCADE dual-axis gated
+  encoder (DSG + BiLSTM + CORAL), and the leakage-safe evaluation protocol for
+  termite count estimation and coarse infestation grading from enclosed-chamber
+  gas curves, together with a sample of the Termite Gas Sensing Dataset (TGSD)
+  and the curated series table.
+authors:
+  - family-names: Wang
+    given-names: Hangjun
+    affiliation: "School of Electronic Information Engineering, Huzhou College, Huzhou 313000, China"
+    email: whj@zafu.edu.cn
+  - family-names: Huang
+    given-names: Hao
+    affiliation: "College of Mathematics and Computer Science, Zhejiang A&F University, Hangzhou 311300, China"
+  - family-names: Wang
+    given-names: Fuzhi
+    affiliation: "School of Electronic Information Engineering, Huzhou College, Huzhou 313000, China"
+license: MIT
+license-url: "https://github.com/hangjunw/sro-gascade/blob/main/LICENSE"
+repository-code: "https://github.com/hangjunw/sro-gascade"
+keywords:
+  - termite monitoring
+  - CO2 sensing
+  - infestation grading
+  - sliding-window sequence reorganization
+  - integrated pest management
+  - leakage-safe evaluation
+preferred-citation:
+  type: article
+  title: "From presence-absence to termite counts and re-calibratable infestation grades: leakage-safe evaluation of enclosed-chamber CO2-CH4 curves"
+  authors:
+    - family-names: Wang
+      given-names: Hangjun
+    - family-names: Huang
+      given-names: Hao
+    - family-names: Wang
+      given-names: Fuzhi
+  journal: "Journal of Pest Science"
+  year: 2026
+  status: submitted

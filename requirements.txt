@@ -1,0 +1,23 @@
+# Core dependencies (versions used for the re-execution described in the README;
+# see Supplementary Material S3 "Software and compute").
+# Python 3.13, CPU-only. Install with:
+#   pip install -r requirements.txt
+torch==2.14.0        # CPU-only install (avoids the multi-GB CUDA wheel):
+#   pip install torch==2.14.0 --index-url https://download.pytorch.org/whl/cpu
+numpy==2.5.3
+pandas==3.0.6
+scikit-learn==1.9.1
+scipy==1.18.1
+xgboost==3.4.1       # optional: falls back to sklearn HistGradientBoosting if absent
+
+# Optional, only for the paper's extended zero-shot / deep-forecaster baselines
+# (documented in the Supplementary Material; not required by this release):
+# chronos-forecasting==2.3.2
+# transformers==5.18.0
+
+# Determinism: by default the pipeline runs single-threaded with PyTorch
+# deterministic algorithms, so that seeding before model construction makes a run
+# reproducible to the bit (see README, "Reproducibility").  To restore the
+# faster multi-threaded path -- results may then drift slightly -- set
+#   export GASCADE_DETERMINISTIC=0
+# before running the scripts.
