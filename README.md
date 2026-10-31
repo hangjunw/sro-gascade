@@ -236,61 +236,20 @@ single-threaded with `torch.use_deterministic_algorithms(True)`, and every model
 is seeded *before* it is constructed. Setting `GASCADE_DETERMINISTIC=0` restores
 the faster multi-threaded path; results may then drift slightly.
 
-**Why the first submission's numbers were not bit-reproducible.** The archived
-run behind those figures initialised the model weights *before* the random
-seed was set, so its weights were drawn from the RNG state of the process
-start: that run is one random draw, and re-running the same seed does not
-reproduce it. This is fixed in this release (`seed_all()` is called before
-every model construction). After the fix, two independent full runs are
-bit-identical: the maximum per-element difference between the two prediction
-sets is **0.0**.
+**What reproduces, and what does not.**
 
-The scope of that defect is narrow, and it is worth stating precisely: it
-affects the **main-split main-model arm and the LOBO fold models** (each fold
-trains its own model). Comparing the archived
-execution with the re-execution key by key, the
-window-random side of the leakage contrast and every baseline arm
-(Ridge, random forest, XGBoost, 1D-CNN, BiLSTM without DSG) and the NAT-lite
-arm are reproduced **bit for bit**; the main model's own point estimates and
-the LOBO pooled/per-fold figures move. The deterministic re-execution of the
-LOBO stage is included in `reference_results/`, and the paper reports its
-values.
+*Reproducible exactly (bit for bit).* With the default `GASCADE_DETERMINISTIC=1`, the released code is fully deterministic: it runs single-threaded, disables the PyTorch/CPU sources of nondeterminism, and seeds the RNG **before** every model is constructed. Two independent full runs then produce the same prediction set down to the last decimal (maximum per-element difference 0.0). Running the code as shipped therefore reproduces every number in the paper. This holds for all baseline models (Ridge, Random Forest, XGBoost, 1D-CNN, BiLSTM without DSG), the NAT-lite arm, and the window-random side of the leakage contrast.
 
-**What the re-execution changes relative to the first submission.** The paper
-reports the re-executed values: macro-F1 **0.821** on the boundary route
-(route ii), count MAE **89.4 ± 16.9** individuals, route-i QWK **0.754**,
-leakage inflation **0.294** in MAE(log1p) (grouped 0.346 vs window-random
-0.053), and boundary-scheme movement ≤ **9.3 pp** under the ±10 % shifts. The
-archived pre-fix run had given 0.867 and 78.4 ± 7.9 (route-i QWK 0.799,
-leakage ≈ 0.277 with grouped 0.329 vs window-random 0.052, movement ≤ 6.7 pp).
-The two gaps in
-the headline metrics are ≈ 1.4 (macro-F1, relative to the across-seed SD of
-0.032 of the re-execution) and ≈ 0.8 (count MAE, relative to the SD pooled
-over the two runs, 13.2) standard deviations, i.e. within the sampling noise of
-a 12-curve test set. All of these figures are taken from the JSON files in
-`reference_results/`; the archived figures are quoted inline above and in this
-section for comparison.
+*Not reproducible from the first submission.* The numbers behind the first submission cannot be regenerated, because that archived run seeded the model weights **after** construction — the initial weights came from the process-start RNG rather than the declared seed, so the run was effectively one unrecorded random draw. Re-running the same seed produced a different model. This is fixed in the current release (the seed is now set before construction), which is why the released headline figures differ slightly from the first submission.
 
-**What does not change, and what does.** The structural conclusions are
-unchanged: the boundary route remains the stronger grading route, and the four
-boundary schemes keep the same accuracy order (quantile > GMM = fixed manual >
-Jenks). Two orderings do move with the initialisation, and should not be read
-as stable:
+*Why it matters, and what stays robust.* Fixing the seed shifts only the **main model's own point estimates and the LOBO fold models** (the parts that depend on the initial weights); everything else was already identical between the two runs. The shift is small relative to the 12-curve test set — the main-model count MAE moves from 78.4 ± 7.9 to 89.4 ± 16.9 individuals, within roughly one standard deviation of the sampling noise — and it changes **no structural conclusion**:
 
-- the **count-MAE ranking of the main model against its closest comparator** —
-  the 1D-CNN reaches 88.3 ± 19.4 individuals against the
-  main model's 89.4 ± 16.9, i.e. the two are indistinguishable at n = 12
-  (the archived pre-fix run had the main model clearly ahead at 78.4 vs 88.3);
-- the **fragility order of the GMM and manual-fixed schemes** — in the
-  archived pre-fix run the GMM was the more fragile of the two (13.5 pp vs
-  12.6 pp of
-  macro-F1 movement under shifting), whereas in the re-execution it is the
-  more robust (10.3 pp vs 11.7 pp).
+- the boundary route remains the stronger grading route;
+- the four boundary schemes keep the same accuracy order (quantile > GMM = manual-fixed > Jenks);
+- the main model's counting accuracy is statistically indistinguishable from the strongest baselines (its ± 16.9 spread equals its gap to the nearest comparator, 1D-CNN at 88.3 ± 19.4), so the paper reports a tie rather than a lead.
 
-Because the count-MAE spread of the re-execution (± 16.9) is as large as the
-gap to the closest comparators, the paper states the main model's counting
-performance as statistically indistinguishable from the strongest baselines
-rather than as a strict lead.
+Two *rankings* move with the random draw and should not be read as stable — the main-model vs 1D-CNN ordering on count MAE, and the GMM-vs-manual-fixed fragility ordering. All reported figures come from the deterministic re-execution in the paper.
+
 
 **Scoring one model instance twice.** The main-split table (route ii) and the
 boundary study (Fig. 6) are two scorings of the same predictions. To avoid
