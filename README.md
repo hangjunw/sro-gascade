@@ -32,8 +32,6 @@ evaluation?
 | 5. Boundary study | `scripts/04_boundaries.py` | Four grade-boundary schemes + ±10 % threshold sensitivity (main-text Fig. 6; Supplementary Tables S7–S8) |
 | 6. Ablations | `scripts/05_ablation.py` | Feature-set, K = 4 and non-overlap arms (Supplementary Table S11) |
 
-The channel ablation of Supplementary Tables S12–S13 and the monitoring-duration
-panel of Fig. 6c are not part of this release (see "Scope" below).
 
 ## Headline results reported in the paper
 
@@ -98,10 +96,8 @@ sro-gascade/
 │   ├── boundaries.py             ←   boundary schemes + sensitivity
 │   ├── ablation.py               ←   Phase-C ablations
 │   ├── xlsxutil.py / statutil.py ←   pure-stdlib xlsx reader / statistics
-├── scripts/                      ← CLI entry points 01–06 (run in order)
-├── run_all.sh                    ← runs the whole pipeline end to end
-├── reference_results/            ← outputs of one deterministic re-execution (see "Reproducibility")
-└── results/                      ← pipeline outputs (created on demand, git-ignored)
+└── scripts/                      ← CLI entry points 01–06 (run in order)
+
 ```
 
 ## Installation
@@ -145,14 +141,13 @@ python scripts/02_run_sro.py \
 python scripts/03_train.py --sro results/sro_g1 --out results/phaseB_results.json --smoke
 ```
 
-Full reproduction (with the complete TGSD placed under `data/TGSD/`, i.e.
-`data1/` and `data2/` batch folders with their `batch_log.txt` logs):
+Full reproduction (with the complete TGSD placed under `data/TGSD/`):
 
 ```bash
 ./run_all.sh data/TGSD
 ```
 
-`run_all.sh` runs the six stages below in order and writes everything to
+runs the six stages below in order and writes everything to
 `results/` (git-ignored). The equivalent explicit sequence is:
 
 ```bash
@@ -210,11 +205,10 @@ breaks, a 1-D GMM and fixed thresholds, under ±10 % perturbation.
 
 ## Data
 
-- **TGSD sample** (`data/TGSD_sample/`): raw `.xlsx` workbooks exactly as
-  recorded by the acquisition software, plus the batch logs
-  (`batch_log.txt`). The sample covers the un-batched `data1` pool (2 of 10
-  nominal-count workbooks) and device batches group4 and group12 in full (12
-  chambers). The complete TGSD (89 curves) is available from the corresponding
+- **TGSD sample** (`data/TGSD_sample/`): sample raw `.xlsx` workbooks exactly as
+  recorded by the acquisition software. The sample covers the un-batched `data1` pool (2 of 10
+  nominal-count workbooks) and device batches group4 and group12.
+  The complete TGSD (89 curves) is available from the corresponding
   author upon reasonable request.
 - **`series-new_curated.csv`**: the curated table of all 89 curves — source,
   device batch, labeled count and the label tier derived from it (Supplementary
@@ -315,22 +309,6 @@ With `--from-preds` the boundary study does not re-train the model; it re-scores
 the exported predictions under every scheme, so both places report the same
 macro-F1 (0.821 in the re-execution).
 
-**Reference artefacts.** `reference_results/` holds the deterministic
-re-execution outputs that the paper reports, plus the archived-run comparisons
-quoted above:
-
-| File | Contents |
-|---|---|
-| `phaseB_results_deterministic.json` | stage-3 results (main split, leakage contrast) |
-| `phaseB_LOBO_deterministic.json` | LOBO stage re-trained under the deterministic settings (pooled + per-fold) |
-| `phaseC_boundaries_deterministic.json` | the four boundary schemes and the ±10 % sensitivity |
-| `phaseE_truncation_deterministic.json` | 4/8/24-h monitoring-duration truncation runs |
-| `phaseC_ablation_deterministic.json` | feature-set / K = 4 / non-overlap ablation arms |
-| `phaseC_channel_deterministic.json` | channel ablation (matched 6-epoch budget) and the LOBO boundary re-calibration contrast |
-| `phaseI_robustness_deterministic.json` | jackknife/bootstrap robustness analysis |
-| `main_model_test_predictions.json` | exported main-model test-curve count predictions per seed (`--dump-preds` format) |
-
-## Citation
 
 ```bibtex
 @article{wang2026termite,
@@ -351,5 +329,4 @@ own licenses.
 
 ## Contact
 
-Hangjun Wang — School of Electronic Information Engineering, Huzhou College,
-Huzhou 313000, China — whj@zafu.edu.cn
+Hangjun Wang — whj@zafu.edu.cn
