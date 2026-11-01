@@ -44,20 +44,19 @@ TGSD_sample/
 │                               #   that are near-duplicates of each other are one
 │                               #   recording cluster (see 01_build_dataset.py).
 └── data2/                      # device batches group4 ... group12 (six chambers each;
-    ├── group4/                    #   group12 contributes five retained curves, its paired
-    │   ├── data1.xlsx ... data6.xlsx   #   zero control having failed QC)
-    │   └── batch_log.txt        #   batch log: released counts per chamber
+    ├── group4/                 #   group12 contributes five retained curves)
+    │   ├── data1.xlsx ... data6.xlsx  
+    │   └── batch_log.txt        
     └── group12/
-        ├── data1.xlsx ... data6.xlsx
-        └── batch_log.txt
+       └── data1.xlsx ... data6.xlsx
 ```
 
 Workbook conventions (handled automatically by `src/tgsd.py`): `data2`
 workbooks carry an English header row (`co2_ppm / temp_C / humidity_RH /
-ch4_ppm / time`); some workbooks keep the header on a separate sheet.
-`data1` workbooks are headerless with the standard channel order
-`co2, temp, hum, ch4, label`. The released **sample** contains 2 of the 10
-`data1` workbooks and the full batches group4 and group12 (21 QC-surviving curves);
+ch4_ppm / time`).
+`data1` workbooks have the standard channel order
+`co2, temp, hum, ch4, label`. The released **sample** contains 2 
+`data1` workbooks and the batches group4 and group12 (21 QC-surviving curves);
 the complete dataset (89 curves) is available from the corresponding author on
 reasonable request.
 
