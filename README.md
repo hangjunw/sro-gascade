@@ -2,7 +2,7 @@
 
 Code and data release for the paper
 
-> **Leakage-safe learning and recalibration of enclosed-chamber CO₂–CH₄ time series for termite counts and infestation grades**
+> **A leakage-safe evaluation and grade-boundary recalibration protocol for termite counts and infestation grades from enclosed-chamber CO2/CH4 sensor time series**
 > Hangjun Wang, Hao Huang, Fuzhi Wang — *Ecological Informatics* (2026, submitted)
 > Correspondence: whj@zafu.edu.cn
 
@@ -273,7 +273,7 @@ macro-F1 (0.821 in the re-execution).
 
 ```bibtex
 @article{wang2026termite,
-  title   = {Leakage-safe learning and recalibration of enclosed-chamber CO₂–CH₄ time series for termite counts and infestation grades},
+  title   = {A leakage-safe evaluation and grade-boundary recalibration protocol for termite counts and infestation grades from enclosed-chamber CO2/CH4 sensor time series},
   author  = {Wang, Hangjun and Huang, Hao and Wang, Fuzhi},
   journal = {Ecological Informatics},
   year    = {2026},
