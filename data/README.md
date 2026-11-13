@@ -1,6 +1,6 @@
 # TGSD — Termite Gas Sensing Dataset
 
-This directory ships two objects of the paper *"Leakage-safe learning and recalibration of enclosed-chamber CO₂–CH₄ time series for termite counts and infestation grades"*:
+This directory ships two objects of the paper *"A leakage-safe evaluation and grade-boundary recalibration protocol for termite counts and infestation grades from enclosed-chamber CO2/CH4 sensor time series"*:
 
 1. **`TGSD_sample/`** — a sample of the raw dataset (`.xlsx` workbooks + batch logs);
 2. **`series-new_curated.csv`** — the curated table of all 89 recording curves.
