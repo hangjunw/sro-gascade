@@ -273,11 +273,9 @@ macro-F1 (0.821 in the re-execution).
 
 ```bibtex
 @article{wang2026termite,
-  title   = {From presence--absence to termite counts and re-calibratable
-             infestation grades: leakage-safe evaluation of enclosed-chamber
-             CO2--CH4 curves},
+  title   = {Leakage-safe learning and recalibration of enclosed-chamber CO₂–CH₄ time series for termite counts and infestation grades},
   author  = {Wang, Hangjun and Huang, Hao and Wang, Fuzhi},
-  journal = {Journal of Pest Science},
+  journal = {Ecological Informatics},
   year    = {2026},
   note    = {Submitted}
 }
