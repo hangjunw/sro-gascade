@@ -2,8 +2,8 @@
 
 Code and data release for the paper
 
-> **From presence–absence to termite counts and re-calibratable infestation grades: leakage-safe evaluation of enclosed-chamber CO₂–CH₄ curves**
-> Hangjun Wang, Hao Huang, Fuzhi Wang — *Journal of Pest Science* (2026, submitted)
+> **Leakage-safe learning and recalibration of enclosed-chamber CO₂–CH₄ time series for termite counts and infestation grades**
+> Hangjun Wang, Hao Huang, Fuzhi Wang — *Ecological Informatics* (2026, submitted)
 > Correspondence: whj@zafu.edu.cn
 
 **About the name.** The repository is named after the paper's two method
